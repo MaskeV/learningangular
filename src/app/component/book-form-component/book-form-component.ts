@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, output, signal } from '@angular/core';
 import { BookModel } from '../../model/book.model';
 import { BookService } from '../../service/book.service';
 import { FormsModule } from '@angular/forms';
@@ -10,6 +10,10 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './book-form-component.scss',
 })
 export class BookFormComponent  implements OnInit{
+
+  saved = output<void>();
+  closed=output<void>();
+  
 
    books = signal<BookModel[]>([]);
   form = signal<BookModel>(this.emptyBook());
@@ -31,6 +35,7 @@ export class BookFormComponent  implements OnInit{
         this.bookService.add({...this.form()}).subscribe(saved =>{
           this.books.update(list => [...list,saved]);
           this.reset();
+          this.saved.emit();
         });
 
       }else{

@@ -8,7 +8,7 @@ import { Navbar } from '../navbar/navbar';
 
 @Component({
   selector: 'app-book',
-  imports: [FormsModule, Navbar],
+  imports: [FormsModule, Navbar,BookFormComponent],
   templateUrl: './book.html',
   styleUrl: './book.scss',
 })
@@ -34,6 +34,7 @@ export class Book implements OnInit{
         this.bookService.add({...this.form()}).subscribe(saved =>{
           this.books.update(list => [...list,saved]);
           this.reset();
+        
         });
 
       }else{
@@ -66,6 +67,14 @@ export class Book implements OnInit{
 
     emptyBook(): BookModel{
       return {title:'',author:'', category:'', quantity:1, publisher:'',publicationYear:0,description:'',available:true};
+    }
+
+    showForm = signal(false);
+
+    openForm() { 
+      this.showForm.set(false);
+      this.fetchbooks();
+
     }
 
 }

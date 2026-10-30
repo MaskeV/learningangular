@@ -4,7 +4,7 @@ import { Book } from './component/book/book';
 
 @Component({
   selector: 'app-root',
-  imports:[Book],
+  imports:[RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

@@ -1,9 +1,11 @@
 <h1>Books</h1>
 
-<app-navbar></app-navbar>
+<app-navbar (add)="openForm()"></app-navbar>
+
+
 
 <table border="1" cellpadding="6">
-    
+
     <tr>
         <th>id</th><th>Title</th><th>Author</th><th>Category</th><th>Quantity</th><th>Publisher</th><th>Publication year</th><th>Available</th><th>Action</th>
     </tr>
@@ -25,3 +27,14 @@
    }  
 
 </table>
+
+
+@if(showForm()){
+    <div class="overlay" (click)="showForm.set(false)">
+        <div class="modal" (click)="$event.stopPropagation()"></div>
+        <app-book-form-component
+            (saved)="save()"
+            (closed)="showForm.set(false)">
+        </app-book-form-component>
+    </div>
+}
