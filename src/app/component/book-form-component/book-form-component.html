@@ -1,0 +1,17 @@
+<h3>{{ editingId() === null ? 'Add Book' : 'Update Book' }}</h3>
+<div id="form">
+  <input placeholder="Title" [(ngModel)]="form().title">
+  <input placeholder="Author" [(ngModel)]="form().author">
+  <input placeholder="Category" [(ngModel)]="form().category">
+  <input type="number" placeholder="Quantity" [(ngModel)]="form().quantity">
+  <input placeholder="Publisher" [(ngModel)]="form().publisher">
+  <input placeholder="YYYY" type="number" min="1000" max="2026" step="1" [(ngModel)]="form().publicationYear">
+  <textarea placeholder="Description" [(ngModel)]="form().description"></textarea>
+  <label><input type="checkbox" [(ngModel)]="form().available">Available</label>
+  <div class="button">
+    <button (click)="save()">{{ editingId() === null ? 'Add' : 'Update' }}</button>
+    @if (editingId() !== null) {
+      <button (click)="reset()">Cancel</button>
+    }
+  </div>
+</div>
